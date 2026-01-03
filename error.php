@@ -10,12 +10,13 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $app = Factory::getApplication();
 $wa  = $this->getWebAssetManager();
 
 // Bootstrap 5 aus Joomla laden
-$wa->useStyle('bootstrap.css');
+HTMLHelper::_('bootstrap.framework');
 
 // Bootstrap Icons und Template CSS laden
 $wa->registerAndUseStyle('bootstrap.icons', 'templates/' . $this->template . '/css/bootstrap-icons.min.css');
