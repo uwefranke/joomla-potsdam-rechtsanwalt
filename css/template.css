@@ -192,23 +192,67 @@ a:focus {
     box-shadow: var(--shadow-sm);
 }
 
+/* Joomla Menü-Listen Styling */
+.site-navigation ul,
+.site-navigation .nav,
 .site-navigation .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     width: 100%;
+    gap: 0;
 }
 
+.site-navigation li,
+.site-navigation .nav-item {
+    margin: 0;
+    padding: 0;
+}
+
+.site-navigation a,
 .site-navigation .nav-link {
+    display: block;
     color: var(--white);
     padding: 1rem 1.5rem;
     font-weight: 500;
     transition: var(--transition-fast);
     border-bottom: 3px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
+.site-navigation a:hover,
 .site-navigation .nav-link:hover,
-.site-navigation .nav-link.active {
+.site-navigation li.active > a,
+.site-navigation .current > a,
+.site-navigation .active > a {
     color: var(--accent-color);
     border-bottom-color: var(--secondary-color);
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dropdown/Submenu Styling */
+.site-navigation ul ul,
+.site-navigation .nav-child {
+    position: absolute;
+    display: none;
+    background-color: var(--primary-color);
+    min-width: 200px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    flex-direction: column;
+}
+
+.site-navigation li:hover > ul,
+.site-navigation .nav-item:hover > .nav-child {
+    display: flex;
+}
+
+.site-navigation ul ul a,
+.site-navigation .nav-child a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Mobile Navigation */
@@ -221,8 +265,35 @@ a:focus {
         background-color: var(--primary-color);
     }
     
+    .site-navigation ul,
+    .site-navigation .navbar-nav {
+        flex-direction: column;
+    }
+    
+    .site-navigation a,
     .site-navigation .nav-link {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 3px solid transparent;
+    }
+    
+    .site-navigation a:hover,
+    .site-navigation .nav-link:hover,
+    .site-navigation li.active > a {
+        border-left-color: var(--secondary-color);
+        border-bottom-color: transparent;
+    }
+    
+    .site-navigation ul ul,
+    .site-navigation .nav-child {
+        position: static;
+        display: none;
+        box-shadow: none;
+        padding-left: 1rem;
+    }
+    
+    .site-navigation li.active > ul,
+    .site-navigation li:hover > ul {
+        display: block;
     }
 }
 
