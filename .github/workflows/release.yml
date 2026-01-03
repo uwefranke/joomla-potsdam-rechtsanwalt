@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*.*.*'  # Wird bei Tags wie v2.0.0, v2.1.0 etc. ausgelöst
 
+permissions:
+  contents: write
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -49,13 +52,9 @@ jobs:
           mv build/potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip ./
       
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          files: potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip
           body: |
             ## Joomla Template: Potsdam Rechtsanwalt ${{ github.ref_name }}
             
@@ -66,19 +65,12 @@ jobs:
             4. Als Standard-Template festlegen
             
             ### Weitere Informationen
-            Siehe [INSTALLATION.md](https://github.com/uwefranke/joomla-potsdam-rechtsanwalt/blob/main/INSTALLATION.md)
+            - [INSTALLATION.md](https://github.com/uwefranke/joomla-potsdam-rechtsanwalt/blob/main/INSTALLATION.md)
+            - [README.md](https://github.com/uwefranke/joomla-potsdam-rechtsanwalt/blob/main/README.md)
             
             ### Changelog
             Alle Änderungen finden Sie in den Commits seit dem letzten Release.
           draft: false
           prerelease: false
-      
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip
-          asset_name: potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip
-          asset_content_type: application/zip
