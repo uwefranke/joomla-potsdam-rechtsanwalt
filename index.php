@@ -28,12 +28,14 @@ $address = $params->get('address', '');
 $openingHours = $params->get('opening_hours', '');
 $showBreadcrumbs = $params->get('show_breadcrumbs', 1);
 
-// CSS und JS laden
+// Bootstrap 5 aus Joomla laden
+$wa->useStyle('bootstrap.css');
+$wa->useScript('bootstrap.bundle');
+
+// Bootstrap Icons und Template CSS/JS laden
+$wa->registerAndUseStyle('bootstrap.icons', 'templates/' . $this->template . '/css/bootstrap-icons.min.css', ['version' => 'auto']);
 $wa->registerAndUseStyle('template.main', 'templates/' . $this->template . '/css/template.css', ['version' => 'auto']);
 $wa->registerAndUseScript('template.main', 'templates/' . $this->template . '/js/template.js', ['version' => 'auto'], ['defer' => true]);
-
-// Bootstrap 5 (optional - je nach Joomla-Version)
-HTMLHelper::_('bootstrap.framework');
 
 // Favicon
 $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1), 'icon', 'rel', ['type' => 'image/svg+xml']);
@@ -57,55 +59,78 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
 <body class="site <?php echo $this->direction === 'rtl' ? 'rtl' : 'ltr'; ?>">
 
     <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="header-top">
-                <?php if ($phone || $email): ?>
-                <div class="contact-quick">
-                    <?php if ($phone): ?>
-                        <span class="phone"><i class="icon-phone"></i> <?php echo htmlspecialchars($phone); ?></span>
-                    <?php endif; ?>
-                    <?php if ($email): ?>
-                        <span class="email"><i class="icon-mail"></i> <?php echo htmlspecialchars($email); ?></span>
-                    <?php endif; ?>
+    <header class="site-header bg-white shadow-sm">
+        <!-- Top Bar -->
+        <?php if ($phone || $email): ?>
+        <div class="header-top bg-light py-2">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-12 d-flex justify-content-end gap-3">
+                        <?php if ($phone): ?>
+                            <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $phone); ?>" class="text-decoration-none text-dark">
+                                <i class="bi bi-telephone-fill text-primary me-2"></i><?php echo htmlspecialchars($phone); ?>
+                            </a>
+                        <?php endif; ?>
+                        <?php if ($email): ?>
+                            <a href="mailto:<?php echo htmlspecialchars($email); ?>" class="text-decoration-none text-dark">
+                                <i class="bi bi-envelope-fill text-primary me-2"></i><?php echo htmlspecialchars($email); ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <?php endif; ?>
             </div>
-            
-            <div class="header-main">
-                <div class="logo">
-                    <?php if ($logo): ?>
-                        <a href="<?php echo Uri::base(); ?>">
-                            <img src="<?php echo Uri::root() . $logo; ?>" alt="<?php echo $app->get('sitename'); ?>">
-                        </a>
-                    <?php else: ?>
-                        <a href="<?php echo Uri::base(); ?>" class="site-title">
-                            <h1><?php echo $app->get('sitename'); ?></h1>
-                        </a>
-                    <?php endif; ?>
+        </div>
+        <?php endif; ?>
+        
+        <!-- Main Header -->
+        <div class="header-main py-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 col-md-4">
+                        <div class="logo">
+                            <?php if ($logo): ?>
+                                <a href="<?php echo Uri::base(); ?>">
+                                    <img src="<?php echo Uri::root() . $logo; ?>" alt="<?php echo $app->get('sitename'); ?>" class="img-fluid" style="max-height: 80px;">
+                                </a>
+                            <?php else: ?>
+                                <a href="<?php echo Uri::base(); ?>" class="text-decoration-none">
+                                    <h1 class="h4 mb-0 text-primary fw-bold"><?php echo $app->get('sitename'); ?></h1>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6 col-md-8">
+                        <?php if ($this->countModules('header')): ?>
+                        <div class="header-modules">
+                            <jdoc:include type="modules" name="header" style="none" />
+                        </div>
+                        <?php endif; ?>
+                        
+                        <!-- Mobile Menu Toggle -->
+                        <button class="navbar-toggler d-md-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="bi bi-list fs-1"></i>
+                        </button>
+                    </div>
                 </div>
-                
-                <?php if ($this->countModules('header')): ?>
-                <div class="header-modules">
-                    <jdoc:include type="modules" name="header" style="none" />
-                </div>
-                <?php endif; ?>
             </div>
         </div>
     </header>
 
     <!-- Navigation -->
     <?php if ($this->countModules('navigation')): ?>
-    <nav class="site-navigation" role="navigation">
+    <nav class="site-navigation bg-primary" role="navigation">
         <div class="container">
-            <jdoc:include type="modules" name="navigation" style="none" />
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <jdoc:include type="modules" name="navigation" style="none" />
+            </div>
         </div>
     </nav>
     <?php endif; ?>
 
     <!-- Banner -->
     <?php if ($this->countModules('banner')): ?>
-    <section class="site-banner">
+    <section class="site-banner py-5 bg-light">
         <div class="container">
             <jdoc:include type="modules" name="banner" style="none" />
         </div>
@@ -114,7 +139,7 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
 
     <!-- Breadcrumbs -->
     <?php if ($showBreadcrumbs && $app->input->getCmd('view') !== 'featured'): ?>
-    <div class="breadcrumbs">
+    <div class="breadcrumbs py-2 bg-light">
         <div class="container">
             <jdoc:include type="modules" name="breadcrumbs" style="none" />
         </div>
@@ -122,18 +147,27 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
     <?php endif; ?>
 
     <!-- Main Content -->
-    <main class="site-main">
+    <!-- Main Content -->
+    <main class="site-main py-5">
         <div class="container">
-            <div class="row">
+            <div class="row g-4">
                 <!-- Sidebar Left -->
                 <?php if ($this->countModules('sidebar-left')): ?>
-                <aside class="col-md-3 sidebar sidebar-left">
+                <aside class="col-lg-3 sidebar sidebar-left">
                     <jdoc:include type="modules" name="sidebar-left" style="card" />
                 </aside>
                 <?php endif; ?>
 
                 <!-- Content -->
-                <div class="<?php echo $this->countModules('sidebar-left') || $this->countModules('sidebar-right') ? 'col-md-9' : 'col-md-12'; ?> content">
+                <?php 
+                $contentWidth = 'col-lg-12';
+                if ($this->countModules('sidebar-left') && $this->countModules('sidebar-right')) {
+                    $contentWidth = 'col-lg-6';
+                } elseif ($this->countModules('sidebar-left') || $this->countModules('sidebar-right')) {
+                    $contentWidth = 'col-lg-9';
+                }
+                ?>
+                <div class="<?php echo $contentWidth; ?> content">
                     <!-- System Messages -->
                     <jdoc:include type="message" />
                     
@@ -143,7 +177,7 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
 
                 <!-- Sidebar Right -->
                 <?php if ($this->countModules('sidebar-right')): ?>
-                <aside class="col-md-3 sidebar sidebar-right">
+                <aside class="col-lg-3 sidebar sidebar-right">
                     <jdoc:include type="modules" name="sidebar-right" style="card" />
                 </aside>
                 <?php endif; ?>
@@ -153,30 +187,54 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
 
     <!-- Footer Top -->
     <?php if ($this->countModules('footer-top')): ?>
-    <section class="footer-top">
+    <section class="footer-top bg-light py-5">
         <div class="container">
-            <jdoc:include type="modules" name="footer-top" style="none" />
+            <div class="row g-4">
+                <jdoc:include type="modules" name="footer-top" style="card" />
+            </div>
         </div>
     </section>
     <?php endif; ?>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="site-footer bg-dark text-white py-4">
         <div class="container">
-            <div class="footer-content">
+            <div class="row g-4">
                 <?php if ($address || $openingHours || $this->countModules('contact-info')): ?>
-                <div class="footer-info">
+                <div class="col-md-4">
                     <?php if ($address): ?>
-                    <div class="address">
-                        <h3>Anschrift</h3>
-                        <?php echo nl2br(htmlspecialchars($address)); ?>
+                    <div class="mb-4">
+                        <h5 class="text-white mb-3"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Anschrift</h5>
+                        <p class="mb-0"><?php echo nl2br(htmlspecialchars($address)); ?></p>
                     </div>
                     <?php endif; ?>
-                    
+                </div>
+                
+                <div class="col-md-4">
+                    <?php if ($phone || $email): ?>
+                    <div class="mb-4">
+                        <h5 class="text-white mb-3"><i class="bi bi-envelope-fill text-primary me-2"></i>Kontakt</h5>
+                        <?php if ($phone): ?>
+                        <p class="mb-2">
+                            <i class="bi bi-telephone me-2"></i>
+                            <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $phone); ?>" class="text-white text-decoration-none"><?php echo htmlspecialchars($phone); ?></a>
+                        </p>
+                        <?php endif; ?>
+                        <?php if ($email): ?>
+                        <p class="mb-0">
+                            <i class="bi bi-envelope me-2"></i>
+                            <a href="mailto:<?php echo htmlspecialchars($email); ?>" class="text-white text-decoration-none"><?php echo htmlspecialchars($email); ?></a>
+                        </p>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="col-md-4">
                     <?php if ($openingHours): ?>
-                    <div class="opening-hours">
-                        <h3>Öffnungszeiten</h3>
-                        <?php echo nl2br(htmlspecialchars($openingHours)); ?>
+                    <div class="mb-4">
+                        <h5 class="text-white mb-3"><i class="bi bi-clock-fill text-primary me-2"></i>Öffnungszeiten</h5>
+                        <p class="mb-0"><?php echo nl2br(htmlspecialchars($openingHours)); ?></p>
                     </div>
                     <?php endif; ?>
                     
@@ -185,24 +243,34 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
                     <?php endif; ?>
                 </div>
                 <?php endif; ?>
-                
-                <?php if ($this->countModules('footer')): ?>
-                <div class="footer-modules">
-                    <jdoc:include type="modules" name="footer" style="none" />
-                </div>
-                <?php endif; ?>
             </div>
             
-            <div class="copyright">
-                <p>&copy; <?php echo date('Y'); ?> <?php echo $app->get('sitename'); ?>. Alle Rechte vorbehalten.</p>
+            <?php if ($this->countModules('footer')): ?>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <jdoc:include type="modules" name="footer" style="none" />
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <hr class="my-4 border-secondary">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; <?php echo date('Y'); ?> <?php echo $app->get('sitename'); ?>. Alle Rechte vorbehalten.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="<?php echo Uri::base(); ?>impressum" class="text-white text-decoration-none me-3">Impressum</a>
+                    <a href="<?php echo Uri::base(); ?>datenschutz" class="text-white text-decoration-none">Datenschutz</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#top" class="back-to-top" aria-label="Nach oben">
-        <i class="icon-arrow-up"></i>
-    </a>
+    <button id="backToTop" class="btn btn-primary position-fixed bottom-0 end-0 m-3 rounded-circle" style="display: none; width: 50px; height: 50px; z-index: 1000;" aria-label="Nach oben">
+        <i class="bi bi-arrow-up fs-4"></i>
+    </button>
 
     <jdoc:include type="modules" name="debug" style="none" />
 </body>
