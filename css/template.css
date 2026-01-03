@@ -196,6 +196,7 @@ a:focus {
     transform: scale(1.05);
 }
 
+/* Navbar Toggle Button - nur auf Mobile sichtbar */
 .navbar-toggler {
     border: 2px solid var(--primary-color);
     background: var(--primary-color);
@@ -209,6 +210,13 @@ a:focus {
     transition: var(--transition-fast);
     width: 45px;
     height: 45px;
+}
+
+/* Toggle auf Desktop verstecken */
+@media (min-width: 768px) {
+    .navbar-toggler {
+        display: none !important;
+    }
 }
 
 .navbar-toggler:hover {
