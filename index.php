@@ -109,8 +109,8 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
                         <?php endif; ?>
                         
                         <!-- Mobile Menu Toggle -->
-                        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="bi bi-list fs-1"></i>
+                        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Menü">
+                            <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
                 </div>
