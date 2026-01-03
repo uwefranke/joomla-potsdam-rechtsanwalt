@@ -51,33 +51,6 @@ jobs:
           # Verschiebe ZIP ins Root für Upload
           mv build/potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip ./
       
-      - name: Calculate SHA512 checksum
-        id: checksum
-        run: |
-          ZIP_FILE="potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip"
-          SHA512=$(sha512sum "$ZIP_FILE" | awk '{print $1}')
-          echo "SHA512=$SHA512" >> $GITHUB_OUTPUT
-          echo "Checksum: $SHA512"
-      
-      - name: Update update.xml with new version and checksum
-        run: |
-          VERSION=${{ steps.tag_name.outputs.TAG }}
-          VERSION_NUMBER=${VERSION#v}  # Entfernt das 'v' vom Tag
-          CHECKSUM="${{ steps.checksum.outputs.SHA512 }}"
-          
-          # Update update.xml mit der neuen Version und Checksum
-          sed -i "s|<version>.*</version>|<version>${VERSION_NUMBER}</version>|" update.xml
-          sed -i "s|potsdam-rechtsanwalt-v[0-9]\+\.[0-9]\+\.[0-9]\+\.zip|potsdam-rechtsanwalt-${VERSION}.zip|g" update.xml
-          sed -i "s|<sha512>.*</sha512>|<sha512>${CHECKSUM}</sha512>|" update.xml
-      
-      - name: Commit and push update.xml
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add update.xml
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update update.xml to ${{ steps.tag_name.outputs.TAG }} with checksum"
-          git push origin HEAD:main
-      
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -90,6 +63,15 @@ jobs:
             2. In Joomla: System → Templates → Install Template
             3. ZIP hochladen und installieren
             4. Als Standard-Template festlegen
+            
+            ### Automatisches Update
+            Das Template kann automatisch über Joomla aktualisiert werden:
+            - System → Update → Extensions
+            
+            ### SHA512 Checksum
+            ```
+            $(sha512sum potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip | awk '{print $1}')
+            ```
             
             ### Weitere Informationen
             - [INSTALLATION.md](https://github.com/uwefranke/joomla-potsdam-rechtsanwalt/blob/main/INSTALLATION.md)
