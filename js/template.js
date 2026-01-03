@@ -69,11 +69,29 @@
     function initMobileNavigation() {
         const navLinks = document.querySelectorAll('#mainNavigation a');
         const navCollapse = document.getElementById('mainNavigation');
+        const navToggler = document.querySelector('.navbar-toggler');
         
-        if (!navCollapse) return;
+        if (!navCollapse || !navToggler) return;
         
         // Prüfe ob Bootstrap verfügbar ist
         const hasBootstrap = typeof bootstrap !== 'undefined' && bootstrap.Collapse;
+        
+        // Initialisiere Bootstrap Collapse wenn verfügbar
+        if (hasBootstrap) {
+            new bootstrap.Collapse(navCollapse, {
+                toggle: false
+            });
+        }
+        
+        // Fallback Toggle-Funktionalität
+        if (!hasBootstrap) {
+            navToggler.addEventListener('click', function(e) {
+                e.preventDefault();
+                navCollapse.classList.toggle('show');
+                const isExpanded = navCollapse.classList.contains('show');
+                navToggler.setAttribute('aria-expanded', isExpanded);
+            });
+        }
         
         // Auto-close nach Link-Klick auf Mobile
         navLinks.forEach(link => {
@@ -87,6 +105,7 @@
                     } else {
                         // Fallback: manuell schließen
                         navCollapse.classList.remove('show');
+                        navToggler.setAttribute('aria-expanded', 'false');
                     }
                 }
             });
@@ -95,9 +114,8 @@
         // Schließe Navigation beim Klick außerhalb
         document.addEventListener('click', function(event) {
             if (window.innerWidth < 768) {
-                const navToggler = document.querySelector('.navbar-toggler');
                 const isClickInsideNav = navCollapse.contains(event.target);
-                const isClickOnToggler = navToggler && navToggler.contains(event.target);
+                const isClickOnToggler = navToggler.contains(event.target);
                 
                 if (!isClickInsideNav && !isClickOnToggler && navCollapse.classList.contains('show')) {
                     if (hasBootstrap) {
@@ -108,6 +126,12 @@
                     } else {
                         // Fallback: manuell schließen
                         navCollapse.classList.remove('show');
+                        navToggler.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            }
+        });
+    };
                     }
                 }
             }

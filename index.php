@@ -101,15 +101,15 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
                         </div>
                     </div>
                     
-                    <div class="col-6 col-md-8">
+                    <div class="col-6 col-md-8 d-flex align-items-center justify-content-end">
                         <?php if ($this->countModules('header')): ?>
-                        <div class="header-modules">
+                        <div class="header-modules d-none d-md-block">
                             <jdoc:include type="modules" name="header" style="none" />
                         </div>
                         <?php endif; ?>
                         
                         <!-- Mobile Menu Toggle -->
-                        <button class="navbar-toggler d-md-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="bi bi-list fs-1"></i>
                         </button>
                     </div>
@@ -122,7 +122,7 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
     <?php if ($this->countModules('navigation')): ?>
     <nav class="site-navigation bg-primary" role="navigation">
         <div class="container">
-            <div class="collapse navbar-collapse" id="mainNavigation">
+            <div class="collapse navbar-collapse show" id="mainNavigation">
                 <jdoc:include type="modules" name="navigation" style="none" />
             </div>
         </div>

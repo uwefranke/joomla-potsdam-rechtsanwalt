@@ -201,10 +201,17 @@ a:focus {
     background: transparent;
     color: var(--primary-color);
     padding: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .navbar-toggler:hover {
     color: var(--secondary-color);
+}
+
+.navbar-toggler:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
 }
 
 /* === Navigation === */
@@ -286,7 +293,12 @@ a:focus {
         border-bottom: none;
     }
     
-    .site-navigation .collapse {
+    .site-navigation .collapse:not(.show) {
+        display: none;
+    }
+    
+    .site-navigation .collapse.show {
+        display: block;
         background-color: var(--primary-color);
     }
     
@@ -319,6 +331,13 @@ a:focus {
     .site-navigation li.active > ul,
     .site-navigation li:hover > ul {
         display: block;
+    }
+}
+
+/* Desktop Navigation - immer sichtbar */
+@media (min-width: 768px) {
+    .site-navigation .collapse {
+        display: block !important;
     }
 }
 
