@@ -1,0 +1,78 @@
+name: Create Release ZIP
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Wird bei Tags wie v2.0.0, v2.1.0 etc. ausgelöst
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Get Tag Name
+        id: tag_name
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: Create Template ZIP
+        run: |
+          # Erstelle temporäres Verzeichnis
+          mkdir -p build/potsdam-rechtsanwalt
+          
+          # Kopiere nur Template-Dateien (ohne Git-Dateien)
+          cp -r css build/potsdam-rechtsanwalt/
+          cp -r fonts build/potsdam-rechtsanwalt/
+          cp -r js build/potsdam-rechtsanwalt/
+          cp -r language build/potsdam-rechtsanwalt/
+          cp -r images build/potsdam-rechtsanwalt/
+          cp index.php build/potsdam-rechtsanwalt/
+          cp error.php build/potsdam-rechtsanwalt/
+          cp templateDetails.xml build/potsdam-rechtsanwalt/
+          cp README.md build/potsdam-rechtsanwalt/
+          cp INSTALLATION.md build/potsdam-rechtsanwalt/
+          
+          # Erstelle ZIP im Build-Verzeichnis
+          cd build
+          zip -r potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip potsdam-rechtsanwalt/
+          cd ..
+          
+          # Verschiebe ZIP ins Root für Upload
+          mv build/potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip ./
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            ## Joomla Template: Potsdam Rechtsanwalt ${{ github.ref_name }}
+            
+            ### Installation
+            1. Laden Sie die ZIP-Datei herunter
+            2. In Joomla: System → Templates → Install Template
+            3. ZIP hochladen und installieren
+            4. Als Standard-Template festlegen
+            
+            ### Weitere Informationen
+            Siehe [INSTALLATION.md](https://github.com/uwefranke/joomla-potsdam-rechtsanwalt/blob/main/INSTALLATION.md)
+            
+            ### Changelog
+            Alle Änderungen finden Sie in den Commits seit dem letzten Release.
+          draft: false
+          prerelease: false
+      
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip
+          asset_name: potsdam-rechtsanwalt-${{ steps.tag_name.outputs.TAG }}.zip
+          asset_content_type: application/zip
