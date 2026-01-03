@@ -1,0 +1,417 @@
+/**
+ * Potsdam Rechtsanwalt Template
+ * Hauptstylesheet für professionelle Rechtsanwaltskanzlei
+ */
+
+/* === Variablen und Grundeinstellungen === */
+:root {
+    --primary-color: #1a4d7a;
+    --secondary-color: #b8860b;
+    --text-color: #333;
+    --light-gray: #f5f5f5;
+    --border-color: #ddd;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --heading-font: Georgia, 'Times New Roman', serif;
+    --transition: all 0.3s ease;
+}
+
+/* === Reset und Basis === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* === Typografie === */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* === Header === */
+.site-header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-top {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+.contact-quick {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+}
+
+.contact-quick span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo img {
+    max-height: 80px;
+    width: auto;
+}
+
+.site-title h1 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* === Navigation === */
+.site-navigation {
+    background-color: var(--light-gray);
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.site-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 0;
+}
+
+.site-navigation li {
+    position: relative;
+}
+
+.site-navigation a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.site-navigation a:hover,
+.site-navigation .active > a {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* === Banner === */
+.site-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+/* === Breadcrumbs === */
+.breadcrumbs {
+    background-color: var(--light-gray);
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+.breadcrumbs a {
+    color: var(--text-color);
+}
+
+.breadcrumbs a:hover {
+    color: var(--primary-color);
+}
+
+/* === Main Content === */
+.site-main {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.row {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.col-md-3 {
+    flex: 0 0 calc(25% - 30px);
+}
+
+.col-md-9 {
+    flex: 0 0 calc(75% - 30px);
+}
+
+.col-md-12 {
+    flex: 0 0 100%;
+}
+
+/* === Sidebar === */
+.sidebar {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.sidebar .module {
+    margin-bottom: 30px;
+}
+
+.sidebar h3 {
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* === Cards === */
+.card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* === System Messages === */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #17a2b8;
+    color: #0c5460;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.alert-error,
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+/* === Footer === */
+.footer-top {
+    background-color: var(--light-gray);
+    padding: 40px 0;
+}
+
+.site-footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 40px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-info h3 {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.footer-info .address,
+.footer-info .opening-hours {
+    margin-bottom: 20px;
+}
+
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+}
+
+/* === Back to Top Button === */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+/* === Error Page === */
+.error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--light-gray);
+}
+
+.error-container {
+    text-align: center;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.error-code {
+    font-size: 6rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.error-message {
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* === Responsive Design === */
+@media (max-width: 992px) {
+    .col-md-3,
+    .col-md-9 {
+        flex: 0 0 100%;
+    }
+    
+    .header-main {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .site-navigation ul {
+        flex-direction: column;
+    }
+    
+    .contact-quick {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    
+    .site-banner {
+        padding: 40px 0;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === Utility Classes === */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }

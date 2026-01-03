@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="template" client="site" method="upgrade">
+    <name>potsdam-rechtsanwalt</name>
+    <creationDate>Januar 2026</creationDate>
+    <author>Ihr Name</author>
+    <authorEmail>ihre@email.de</authorEmail>
+    <authorUrl>http://www.potsdam-rechtsanwalt.de</authorUrl>
+    <copyright>Copyright (C) 2026 - Alle Rechte vorbehalten</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <version>1.0.0</version>
+    <description>Professionelles Joomla-Template für Rechtsanwaltskanzlei</description>
+
+    <!-- Haupt-Template-Datei -->
+    <files>
+        <filename>index.php</filename>
+        <filename>templateDetails.xml</filename>
+        <filename>error.php</filename>
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>images</folder>
+        <folder>language</folder>
+    </files>
+
+    <!-- Positionen für Module -->
+    <positions>
+        <position>header</position>
+        <position>navigation</position>
+        <position>banner</position>
+        <position>sidebar-left</position>
+        <position>sidebar-right</position>
+        <position>main-content</position>
+        <position>footer-top</position>
+        <position>footer</position>
+        <position>contact-info</position>
+    </positions>
+
+    <!-- Template-Parameter -->
+    <config>
+        <fields name="params">
+            <fieldset name="advanced">
+                <field
+                    name="logo"
+                    type="media"
+                    label="Logo"
+                    description="Wählen Sie das Kanzlei-Logo"
+                />
+                <field
+                    name="primary_color"
+                    type="color"
+                    default="#1a4d7a"
+                    label="Primärfarbe"
+                    description="Hauptfarbe für das Template"
+                />
+                <field
+                    name="secondary_color"
+                    type="color"
+                    default="#b8860b"
+                    label="Sekundärfarbe"
+                    description="Akzentfarbe für das Template"
+                />
+                <field
+                    name="phone"
+                    type="text"
+                    default=""
+                    label="Telefonnummer"
+                    description="Telefonnummer der Kanzlei"
+                />
+                <field
+                    name="email"
+                    type="text"
+                    default=""
+                    label="E-Mail-Adresse"
+                    description="E-Mail-Adresse der Kanzlei"
+                />
+                <field
+                    name="address"
+                    type="textarea"
+                    default=""
+                    label="Adresse"
+                    description="Adresse der Kanzlei"
+                    rows="3"
+                />
+                <field
+                    name="opening_hours"
+                    type="textarea"
+                    default=""
+                    label="Öffnungszeiten"
+                    description="Öffnungszeiten der Kanzlei"
+                    rows="3"
+                />
+                <field
+                    name="show_breadcrumbs"
+                    type="radio"
+                    default="1"
+                    label="Breadcrumbs anzeigen"
+                    description="Breadcrumb-Navigation anzeigen"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">Ja</option>
+                    <option value="0">Nein</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
