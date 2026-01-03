@@ -332,59 +332,48 @@ a:focus {
 @media (max-width: 767.98px) {
     .site-navigation {
         border-bottom: none;
-        position: relative;
     }
     
-    .site-navigation .container {
-        padding: 0;
-    }
-    
-    .site-navigation .collapse:not(.show) {
+    /* Bootstrap Collapse Funktionalität */
+    .site-navigation #mainNavigation.collapse:not(.show) {
         display: none;
     }
     
-    .site-navigation .collapse.show {
+    .site-navigation #mainNavigation.collapse.show {
         display: block;
-        background-color: var(--primary-color);
-        width: 100%;
     }
     
     .site-navigation ul,
     .site-navigation .navbar-nav {
         flex-direction: column;
+        width: 100%;
     }
     
     .site-navigation a,
     .site-navigation .nav-link {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         border-left: 3px solid transparent;
+        white-space: normal;
+        padding: 1rem 1.5rem;
     }
     
     .site-navigation a:hover,
     .site-navigation .nav-link:hover,
     .site-navigation li.active > a {
         border-left-color: var(--secondary-color);
-        border-bottom-color: transparent;
+        background-color: rgba(255, 255, 255, 0.1);
     }
     
+    /* Submenüs auf Mobile ausblenden */
     .site-navigation ul ul,
     .site-navigation .nav-child {
-        position: static;
-        display: none !important;
-        box-shadow: none;
-        padding-left: 1rem;
-    }
-    
-    /* Submenüs auf Mobile deaktiviert - nur Hauptmenü */
-    .site-navigation li.active > ul,
-    .site-navigation li:hover > ul {
         display: none !important;
     }
 }
 
 /* Desktop Navigation - immer sichtbar */
 @media (min-width: 768px) {
-    .site-navigation .collapse {
+    .site-navigation #mainNavigation {
         display: block !important;
     }
 }
