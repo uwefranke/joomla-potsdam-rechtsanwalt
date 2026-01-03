@@ -72,13 +72,21 @@
         
         if (!navCollapse) return;
         
+        // Prüfe ob Bootstrap verfügbar ist
+        const hasBootstrap = typeof bootstrap !== 'undefined' && bootstrap.Collapse;
+        
         // Auto-close nach Link-Klick auf Mobile
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth < 768 && navCollapse.classList.contains('show')) {
-                    const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
-                    if (bsCollapse) {
-                        bsCollapse.hide();
+                    if (hasBootstrap) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+                        if (bsCollapse) {
+                            bsCollapse.hide();
+                        }
+                    } else {
+                        // Fallback: manuell schließen
+                        navCollapse.classList.remove('show');
                     }
                 }
             });
@@ -92,9 +100,14 @@
                 const isClickOnToggler = navToggler && navToggler.contains(event.target);
                 
                 if (!isClickInsideNav && !isClickOnToggler && navCollapse.classList.contains('show')) {
-                    const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
-                    if (bsCollapse) {
-                        bsCollapse.hide();
+                    if (hasBootstrap) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+                        if (bsCollapse) {
+                            bsCollapse.hide();
+                        }
+                    } else {
+                        // Fallback: manuell schließen
+                        navCollapse.classList.remove('show');
                     }
                 }
             }

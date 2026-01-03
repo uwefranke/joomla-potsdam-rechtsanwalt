@@ -28,8 +28,9 @@ $address = $params->get('address', '');
 $openingHours = $params->get('opening_hours', '');
 $showBreadcrumbs = $params->get('show_breadcrumbs', 1);
 
-// Bootstrap 5 aus Joomla laden
+// Bootstrap 5 aus Joomla laden (CSS + JS)
 HTMLHelper::_('bootstrap.framework');
+HTMLHelper::_('bootstrap.collapse');
 
 // Bootstrap Icons und Template CSS/JS laden
 $wa->registerAndUseStyle('bootstrap.icons', 'templates/' . $this->template . '/css/bootstrap-icons.min.css', ['version' => 'auto']);
