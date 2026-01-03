@@ -58,10 +58,11 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
 </head>
 <body class="site <?php echo $this->direction === 'rtl' ? 'rtl' : 'ltr'; ?>">
 
-    <!-- Header -->
-    <header class="site-header bg-white shadow-sm">
-        <!-- Top Bar -->
-        <?php if ($phone || $email): ?>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="site-header bg-white shadow-sm">
+            <!-- Top Bar -->
+            <?php if ($phone || $email): ?>
         <div class="header-top bg-light py-2">
             <div class="container">
                 <div class="row align-items-center">
@@ -266,6 +267,8 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
             </div>
         </div>
     </footer>
+
+    </div><!-- /.page-wrapper -->
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="btn btn-primary position-fixed bottom-0 end-0 m-3 rounded-circle" style="display: none; width: 50px; height: 50px; z-index: 1000;" aria-label="Nach oben">

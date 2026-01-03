@@ -2,8 +2,8 @@
 <extension type="template" client="site" method="upgrade">
     <name>potsdam-rechtsanwalt</name>
     <creationDate>Januar 2026</creationDate>
-    <author>Ihr Name</author>
-    <authorEmail>ihre@email.de</authorEmail>
+    <author>Uwe Franke</author>
+    <authorEmail>uwe.franke@outlook.com</authorEmail>
     <authorUrl>http://www.potsdam-rechtsanwalt.de</authorUrl>
     <copyright>Copyright (C) 2026 - Alle Rechte vorbehalten</copyright>
     <license>GNU General Public License version 2 or later</license>
