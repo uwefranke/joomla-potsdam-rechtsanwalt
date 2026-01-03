@@ -27,7 +27,13 @@ jobs:
           cp -r fonts build/potsdam-rechtsanwalt/
           cp -r js build/potsdam-rechtsanwalt/
           cp -r language build/potsdam-rechtsanwalt/
-          cp -r images build/potsdam-rechtsanwalt/
+          
+          # Erstelle images Ordner explizit (auch wenn leer)
+          mkdir -p build/potsdam-rechtsanwalt/images
+          if [ -d "images" ] && [ "$(ls -A images)" ]; then
+            cp -r images/* build/potsdam-rechtsanwalt/images/ 2>/dev/null || true
+          fi
+          
           cp index.php build/potsdam-rechtsanwalt/
           cp error.php build/potsdam-rechtsanwalt/
           cp templateDetails.xml build/potsdam-rechtsanwalt/
