@@ -197,21 +197,33 @@ a:focus {
 }
 
 .navbar-toggler {
-    border: none;
-    background: transparent;
+    border: 2px solid var(--primary-color);
+    background: var(--white);
     color: var(--primary-color);
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     font-size: 1.5rem;
     cursor: pointer;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
 }
 
 .navbar-toggler:hover {
-    color: var(--secondary-color);
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
 }
 
 .navbar-toggler:focus {
     outline: 2px solid var(--secondary-color);
     outline-offset: 2px;
+}
+
+.navbar-toggler i {
+    display: block;
+    line-height: 1;
 }
 
 /* === Navigation === */
@@ -291,6 +303,11 @@ a:focus {
 @media (max-width: 767.98px) {
     .site-navigation {
         border-bottom: none;
+        position: relative;
+    }
+    
+    .site-navigation .container {
+        padding: 0;
     }
     
     .site-navigation .collapse:not(.show) {
@@ -300,6 +317,7 @@ a:focus {
     .site-navigation .collapse.show {
         display: block;
         background-color: var(--primary-color);
+        width: 100%;
     }
     
     .site-navigation ul,

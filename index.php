@@ -122,7 +122,7 @@ $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1)
     <?php if ($this->countModules('navigation')): ?>
     <nav class="site-navigation bg-primary" role="navigation">
         <div class="container">
-            <div class="collapse navbar-collapse show" id="mainNavigation">
+            <div class="navbar-collapse collapse" id="mainNavigation">
                 <jdoc:include type="modules" name="navigation" style="none" />
             </div>
         </div>
