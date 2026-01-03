@@ -264,7 +264,7 @@ a:focus {
     max-width: 300px;
     box-shadow: var(--shadow-xl);
     border-radius: var(--radius-md);
-    margin-top: 0.5rem;
+    margin-top: 0;
     z-index: 1000;
     flex-direction: column;
     overflow: hidden;
@@ -367,6 +367,7 @@ a:focus {
 .site-main {
     min-height: 60vh;
     background-color: var(--white);
+    padding: var(--spacing-lg) var(--spacing-md);
 }
 
 .content {
