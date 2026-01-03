@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updates>
+    <update>
+        <name>Potsdam Rechtsanwalt Template</name>
+        <description>Joomla Template für Rechtsanwalt Matthias Lange</description>
+        <element>potsdam-rechtsanwalt</element>
+        <type>template</type>
+        <client>site</client>
+        <version>2.0.5</version>
+        <infourl title="Potsdam Rechtsanwalt Template">https://github.com/uwefranke/joomla-potsdam-rechtsanwalt</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/uwefranke/joomla-potsdam-rechtsanwalt/releases/download/v2.0.5/potsdam-rechtsanwalt-v2.0.5.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>Uwe Franke</maintainer>
+        <maintainerurl>https://github.com/uwefranke</maintainerurl>
+        <targetplatform name="joomla" version="(5\.[0-9]|6\.[0-9])"/>
+    </update>
+</updates>

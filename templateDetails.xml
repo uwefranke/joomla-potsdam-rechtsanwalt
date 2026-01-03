@@ -10,6 +10,11 @@
     <version>2.0.5</version>
     <description>TPL_POTSDAM_RECHTSANWALT_XML_DESCRIPTION</description>
 
+    <!-- Update Server -->
+    <updateservers>
+        <server type="extension" name="Potsdam Rechtsanwalt Template Updates">https://raw.githubusercontent.com/uwefranke/joomla-potsdam-rechtsanwalt/main/update.xml</server>
+    </updateservers>
+
     <!-- Haupt-Template-Datei -->
     <files>
         <filename>index.php</filename>
